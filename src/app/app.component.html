@@ -26,5 +26,41 @@
       <button pButton type="submit" label="Pesquisar"></button>
     </div>
 
+  <!-- closing div class ui-g -->
   </div>
+
+  <!-- tabela de dados da página de lançamentos-->
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <!-- property binding: [value]="lancamentos". passando um array de objetos(lancamentos) do componente para popular a tabela.
+      value é uma propriedade do componente p-table do primeNg.
+        aqui já é feito um loop no array lancamentos. -->
+      <p-table [value]="lancamentos">
+        <!-- headers -->
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Pessoa</th>
+            <th>Descricao</th>
+            <th class="col-data-header">Vencimento</th>
+            <th class="col-data-header">Pagamento</th>
+            <th class="col-valor-header">Valor</th>
+          </tr>
+        <!-- closing headers -->
+        </ng-template>
+        <!-- let-lancamento é o mesmo que ngFor="let lancamento of lancamentos" -->
+        <ng-template pTemplate="body" let-lancamento>
+            <tr>
+              <td>{{lancamento.pessoa}}</td>
+              <td>{{lancamento.descricao}}</td>
+              <td class="col-data-content">{{lancamento.dataVencimento}}</td>
+              <td class="col-data-content">{{lancamento.dataPagamento}}</td>
+              <td class="col-valor-content">{{lancamento.valor}}</td>
+            </tr>
+        </ng-template>
+      </p-table>
+    <!-- closing div class ui-g-12 -->
+    </div>
+  <!-- closing div class ui-g -->
+  </div>
+<!-- closing div class container-->
 </div>
