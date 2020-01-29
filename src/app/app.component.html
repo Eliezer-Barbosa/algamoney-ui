@@ -35,7 +35,7 @@
       <!-- property binding: [value]="lancamentos". passando um array de objetos(lancamentos) do componente para popular a tabela.
       value é uma propriedade do componente p-table do primeNg.
         aqui já é feito um loop no array lancamentos. -->
-      <p-table [value]="lancamentos">
+      <p-table [value]="lancamentos" [paginator]="true" [rows]="2">
         <!-- headers -->
         <ng-template pTemplate="header">
           <tr>
