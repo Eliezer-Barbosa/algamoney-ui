@@ -1,11 +1,30 @@
-<p-tabView>
-  <p-tabPanel header="Header 1">
-     Content 1
-  </p-tabPanel>
-  <p-tabPanel header="Header 2">
-      Content 2
-  </p-tabPanel>
-  <p-tabPanel header="Header 3">
-      Content 3
-  </p-tabPanel>
-</p-tabView>
+<div class="container">
+  <!-- using css grid from primeNg -->
+  <div class="ui-g">
+    <!-- css grid 12 columns -->
+    <div class="ui-g-12">
+      <h1>Lançamentos</h1>
+    </div>
+
+    <!-- ui-fluid: gets 100% of available space. all its children will inherit this behavior-->
+    <div class="ui-g-12 ui-fluid">
+      <label>Descrição</label>
+      <!-- pInputText: primeNg diretive, that has primeNg own css style-->
+      <input pInputText type="text">
+    </div>
+
+    <div class="ui-g-12">
+      <label style="display: block">Vencimento</label>
+      <!-- 95px: the exactly size of a standard date format, like 29/01/2019 -->
+      <input pInputText type="text" style="width: 95px">
+
+      <label>até</label>
+      <input pInputText type="text" style="width: 95px">
+    </div>
+
+    <div class="ui-g-12">
+      <button pButton type="submit" label="Pesquisar"></button>
+    </div>
+
+  </div>
+</div>
