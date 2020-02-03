@@ -62,16 +62,16 @@
               </td>
               <td class="col-data-content">
                 <span class="ui-column-title">Vencimento</span>
-                {{lancamento.dataVencimento}}
+                {{lancamento.dataVencimento | date:'dd/MM/yyyy'}}
               </td>
               <td class="col-data-content">
                 <span class="ui-column-title">Pagamento</span>
-                {{lancamento.dataPagamento}}
+                {{lancamento.dataPagamento | date:'dd/MM/yyyy'}}
               </td>
               <td class="col-valor-content"
                 [ngStyle]="{ color: lancamento.tipo === 'DESPESA' ? 'red' : 'blue'}">
                 <span class="ui-column-title">Valor</span>
-                {{lancamento.valor}}
+                {{lancamento.valor | number:'1.2-2'}}
               </td>
               <!-- icones edit and delete -->
               <td class="col-acoes">
