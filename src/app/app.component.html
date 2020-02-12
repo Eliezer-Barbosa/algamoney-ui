@@ -10,3 +10,13 @@
 -->
 
 <ng2-toasty></ng2-toasty>
+
+<!-- componente de confirmação de exclusão customizado para portugues-->
+<p-confirmDialog header="Confirmação" icon="pi pi-question-circle" #confirmacao>
+  <p-footer>
+    <button type="button" pButton icon="pi pi-check-circle" label="Sim"
+      (click)="confirmacao.accept()"></button>
+    <button type="button" pButton icon="pi pi-times-circle" label="Não"
+      (click)="confirmacao.reject()"></button>
+  </p-footer>
+</p-confirmDialog>
