@@ -52,4 +52,12 @@ export class PessoaService {
       // tslint:disable-next-line: no-string-literal
       .then(response => response['content']);
   }
+
+  excluir(codigo: number): Promise<void> {
+    const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+
+    return this.http.delete(`${this.pessoasUrl}/${codigo}`, { headers })
+      .toPromise()
+      .then(() => null);
+  }
 }

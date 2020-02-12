@@ -2,10 +2,11 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { ToastyService } from 'ng2-toasty';
 import { LazyLoadEvent, ConfirmationService } from 'primeng/api';
+import { Table } from 'primeng/table/table';
 
 import { ErrorHandlerService } from './../../core/error-handler.service';
 import { LancamentoService, LancamentoFiltro } from './../lancamento.service';
-import { Table } from 'primeng/table/table';
+
 
 @Component({
   selector: 'app-lancamentos-pesquisa',
