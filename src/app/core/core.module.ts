@@ -9,6 +9,7 @@ import { ConfirmationService } from 'primeng/api';
 import { ErrorHandlerService } from './error-handler.service';
 import { PessoaService } from './../pessoas/pessoa.service';
 import { LancamentoService } from './../lancamentos/lancamento.service';
+import { CategoriaService } from './../categorias/categoria.service';
 
 @NgModule({
   declarations: [NavbarComponent],
@@ -27,6 +28,7 @@ import { LancamentoService } from './../lancamentos/lancamento.service';
     LancamentoService,
     PessoaService,
     ConfirmationService,
+    CategoriaService,
     ErrorHandlerService,
     // provider por valor, provide é o token "chave" e useValue é o valor
     // essa configuração altera o valor monetário para o padrao brasileiro (Real)
