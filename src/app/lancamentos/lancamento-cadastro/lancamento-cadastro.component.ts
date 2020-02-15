@@ -1,4 +1,6 @@
-import { FormControl } from '@angular/forms';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ActivatedRoute } from '@angular/router';
+import { FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
 import { ToastyService } from 'ng2-toasty';
@@ -31,10 +33,17 @@ export class LancamentoCadastroComponent implements OnInit {
     private pessoaService: PessoaService,
     private lancamentoService: LancamentoService,
     private toasty: ToastyService,
-    private errorHandler: ErrorHandlerService
+    private errorHandler: ErrorHandlerService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
+    /* no app.module temos um path para lancamentos/:codigo
+    essa variavel route retorna esse valor.
+    */
+    // tslint:disable-next-line: no-string-literal
+    console.log(this.route.snapshot.params['codigo']);
+
     this.carregarCategorias();
     this.carregarPessoas();
   }
