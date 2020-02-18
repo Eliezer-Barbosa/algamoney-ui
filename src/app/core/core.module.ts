@@ -1,3 +1,4 @@
+import { Title } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NgModule, LOCALE_ID } from '@angular/core';
@@ -31,6 +32,7 @@ import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada.component'
     LancamentoService,
     PessoaService,
     ConfirmationService,
+    Title,
     CategoriaService,
     ErrorHandlerService,
     // provider por valor, provide é o token "chave" e useValue é o valor
