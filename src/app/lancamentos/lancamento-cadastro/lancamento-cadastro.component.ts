@@ -44,8 +44,27 @@ export class LancamentoCadastroComponent implements OnInit {
     // tslint:disable-next-line: no-string-literal
     console.log(this.route.snapshot.params['codigo']);
 
+    // tslint:disable-next-line: no-string-literal
+    const codigoLancamento = this.route.snapshot.params['codigo'];
+
+    if (codigoLancamento) {
+      this.carregarLancamento(codigoLancamento);
+    }
+
     this.carregarCategorias();
     this.carregarPessoas();
+  }
+
+  get editando() {
+    return Boolean(this.lancamento.codigo);
+  }
+
+  carregarLancamento(codigo: number) {
+    this.lancamentoService.buscarPorCodigo(codigo)
+      .then(lancamento => {
+        this.lancamento = lancamento;
+      })
+      .catch(erro => this.errorHandler.handle(erro));
   }
 
   // método que chama o serviço para salvar um lançamento
