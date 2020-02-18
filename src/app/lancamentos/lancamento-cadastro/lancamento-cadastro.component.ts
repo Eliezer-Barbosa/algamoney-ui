@@ -1,5 +1,5 @@
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
@@ -34,7 +34,8 @@ export class LancamentoCadastroComponent implements OnInit {
     private lancamentoService: LancamentoService,
     private toasty: ToastyService,
     private errorHandler: ErrorHandlerService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -79,11 +80,14 @@ export class LancamentoCadastroComponent implements OnInit {
   // método que chama o serviço para adicionar um lançamento
   adicionarLancamento(form: FormControl) {
     this.lancamentoService.adicionar(this.lancamento)
-      .then(() => {
+      .then(lancamentoAdicionado => {
         this.toasty.success('Lançamento adicionado com sucesso!');
 
-        form.reset();
-        this.lancamento = new Lancamento();
+       // form.reset();
+       // this.lancamento = new Lancamento();
+
+       // navegação imperativa - /lancamentos/codigo
+        this.router.navigate(['/lancamentos', lancamentoAdicionado.codigo]);
       })
       .catch(erro => this.errorHandler.handle(erro));
   }
@@ -114,6 +118,12 @@ export class LancamentoCadastroComponent implements OnInit {
         .map(p => ({ label: p.nome, value: p.codigo}));
     })
     .catch(erro => this.errorHandler.handle(erro));
+  }
+
+  novo(form: FormControl) {
+    form.reset(new Lancamento());
+
+    this.router.navigate(['/lancamentos/novo']);
   }
 
 }
