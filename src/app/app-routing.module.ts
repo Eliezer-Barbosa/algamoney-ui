@@ -8,7 +8,6 @@ import { LancamentosPesquisaComponent } from './lancamentos/lancamentos-pesquisa
 
 const routes: Routes = [
   { path: '', redirectTo: 'lancamentos', pathMatch: 'full' }, // redireciona para outro path
-  { path: 'pessoas', component: PessoasPesquisaComponent },
   { path: 'pagina-nao-encontrada', component: PaginaNaoEncontradaComponent },
   // wildcard '**': qualquer coisa que não tiver uma rota configurada
   { path: '**', redirectTo: 'pagina-nao-encontrada' }
