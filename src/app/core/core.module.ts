@@ -8,6 +8,7 @@ import { ToastyModule } from 'ng2-toasty';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 
+import { AuthService } from './../seguranca/auth.service';
 import { ErrorHandlerService } from './error-handler.service';
 import { PessoaService } from './../pessoas/pessoa.service';
 import { LancamentoService } from './../lancamentos/lancamento.service';
@@ -35,6 +36,7 @@ import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada.component'
     Title,
     CategoriaService,
     ErrorHandlerService,
+    AuthService,
     // provider por valor, provide é o token "chave" e useValue é o valor
     // essa configuração altera o valor monetário para o padrao brasileiro (Real)
     { provide: LOCALE_ID, useValue: 'pt-BR'}
