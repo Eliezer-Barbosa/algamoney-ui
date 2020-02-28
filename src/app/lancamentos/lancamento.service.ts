@@ -80,7 +80,7 @@ export class LancamentoService {
     //   .set('Content-Type', 'application/json');
 
     return this.http.put(`${this.lancamentosUrl}/${lancamento.codigo}`,
-        JSON.stringify(lancamento))
+        lancamento)
       .toPromise()
       .then(response => {
         const lancamentoAlterado = response as Lancamento;

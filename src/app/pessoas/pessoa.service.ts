@@ -59,8 +59,10 @@ export class PessoaService {
   }
 
   mudarStatus(codigo: number, ativo: boolean): Promise<void> {
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json');
 
-    return this.http.put(`${this.pessoasUrl}/${codigo}/ativo`, ativo)
+    return this.http.put(`${this.pessoasUrl}/${codigo}/ativo`, ativo, { headers })
       .toPromise()
       .then(() => null);
   }
@@ -75,7 +77,7 @@ export class PessoaService {
   atualizar(pessoa: Pessoa): Promise<Pessoa> {
 
     return this.http.put(`${this.pessoasUrl}/${pessoa.codigo}`,
-        JSON.stringify(pessoa))
+        pessoa)
       .toPromise()
       .then(response => response as Pessoa);
   }
