@@ -7,6 +7,8 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class AuthService {
 
+  tokensRevokeUrl = 'http://localhost:8080/tokens/revoke';
+
   oauthTokenUrl = 'http://localhost:8080/oauth/token';
   jwtPayload: any;
 
@@ -59,6 +61,19 @@ export class AuthService {
       .catch(response => {
         console.log('Erro ao renovar token', response);
         return Promise.resolve(null);
+      });
+  }
+
+  limparAccessToken() {
+    localStorage.removeItem('token');
+    this.jwtPayload = null;
+  }
+
+  logout() {
+    return this.http.delete(this.tokensRevokeUrl, { withCredentials: true })
+      .toPromise()
+      .then(() => {
+        this.limparAccessToken();
       });
   }
 
