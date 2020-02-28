@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from './../auth.service';
 
 @Component({
@@ -8,16 +8,13 @@ import { AuthService } from './../auth.service';
   templateUrl: './login-form.component.html',
   styleUrls: ['./login-form.component.css']
 })
-export class LoginFormComponent implements OnInit {
+export class LoginFormComponent {
 
   constructor(
     private auth: AuthService,
     private errorHandler: ErrorHandlerService,
     private router: Router
     ) { }
-
-  ngOnInit() {
-  }
 
   login(usuario: string, senha: string) {
     this.auth.login(usuario, senha)
