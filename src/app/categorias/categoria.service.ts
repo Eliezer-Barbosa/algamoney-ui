@@ -1,3 +1,4 @@
+import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -8,9 +9,11 @@ import 'rxjs/add/operator/toPromise';
 })
 export class CategoriaService {
 
-  categoriasUrl = 'http://localhost:8080/categorias';
+  categoriasUrl: string;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.categoriasUrl = `${environment.apiUrl}/categorias`;
+   }
 
   listarTodas(): Promise<any> {
 
