@@ -10,8 +10,10 @@ import { Component } from '@angular/core';
 })
 export class NavbarComponent {
 
+  exibindoMenu = false;
+
   constructor(
-    private auth: AuthService,
+    public auth: AuthService,
     private errorHandler: ErrorHandlerService,
     private router: Router
   ) {}
@@ -23,8 +25,6 @@ export class NavbarComponent {
       })
       .catch(erro => this.errorHandler.handle(erro));
   }
-
-  exibindoMenu = false;
 
   criarNovoAccessToken() {
     this.auth.obterNovoAccessToken();

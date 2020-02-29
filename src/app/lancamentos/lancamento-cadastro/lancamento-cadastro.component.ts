@@ -1,7 +1,6 @@
 import { Title } from '@angular/platform-browser';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
 import { ToastyService } from 'ng2-toasty';
@@ -41,15 +40,9 @@ export class LancamentoCadastroComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.title.setTitle('Novo lançamento');
-    /* no app.module temos um path para lancamentos/:codigo
-    essa variavel route retorna esse valor.
-    */
-    // tslint:disable-next-line: no-string-literal
-    console.log(this.route.snapshot.params['codigo']);
-
-    // tslint:disable-next-line: no-string-literal
     const codigoLancamento = this.route.snapshot.params['codigo'];
+
+    this.title.setTitle('Novo lançamento');
 
     if (codigoLancamento) {
       this.carregarLancamento(codigoLancamento);
@@ -73,7 +66,7 @@ export class LancamentoCadastroComponent implements OnInit {
   }
 
   // método que decide se vai editar ou adicionar um lancamento
-  salvar(form: FormControl) {
+  salvar(form) {
     if (this.editando) {
       this.atualizarLancamento(form);
     } else {
@@ -82,7 +75,7 @@ export class LancamentoCadastroComponent implements OnInit {
   }
 
   // método que chama o serviço para adicionar um lançamento
-  adicionarLancamento(form: FormControl) {
+  adicionarLancamento(form) {
     this.lancamentoService.adicionar(this.lancamento)
       .then(lancamentoAdicionado => {
         this.toasty.success('Lançamento adicionado com sucesso!');
@@ -96,7 +89,7 @@ export class LancamentoCadastroComponent implements OnInit {
       .catch(erro => this.errorHandler.handle(erro));
   }
 
-  atualizarLancamento(form: FormControl) {
+  atualizarLancamento(form) {
     this.lancamentoService.atualizar(this.lancamento)
       .then(lancamento => {
         this.lancamento = lancamento;
@@ -125,7 +118,7 @@ export class LancamentoCadastroComponent implements OnInit {
     .catch(erro => this.errorHandler.handle(erro));
   }
 
-  novo(form: FormControl) {
+  novo(form) {
     form.reset(new Lancamento());
 
     this.router.navigate(['/lancamentos/novo']);

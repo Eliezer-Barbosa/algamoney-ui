@@ -1,3 +1,4 @@
+import { NaoAutorizadoComponent } from './nao-autorizado.component';
 import { Title } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -16,7 +17,11 @@ import { CategoriaService } from './../categorias/categoria.service';
 import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada.component';
 
 @NgModule({
-  declarations: [NavbarComponent, PaginaNaoEncontradaComponent],
+  declarations: [
+    NavbarComponent,
+    PaginaNaoEncontradaComponent,
+    NaoAutorizadoComponent
+  ],
   imports: [
     CommonModule,
     RouterModule,
