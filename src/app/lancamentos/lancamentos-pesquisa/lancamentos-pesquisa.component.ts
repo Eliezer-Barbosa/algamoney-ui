@@ -1,14 +1,12 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
+import { LazyLoadEvent, ConfirmationService } from 'primeng/components/common/api';
 import { ToastyService } from 'ng2-toasty';
-import { LazyLoadEvent, ConfirmationService } from 'primeng/api';
-import { Table } from 'primeng/table/table';
 
+import { AuthService } from './../../seguranca/auth.service';
 import { ErrorHandlerService } from './../../core/error-handler.service';
 import { LancamentoService, LancamentoFiltro } from './../lancamento.service';
-import { AuthService } from 'src/app/seguranca/auth.service';
-
 
 @Component({
   selector: 'app-lancamentos-pesquisa',
@@ -20,11 +18,11 @@ export class LancamentosPesquisaComponent implements OnInit {
   totalRegistros = 0;
   filtro = new LancamentoFiltro();
   lancamentos = [];
-  @ViewChild('tabela', {static: true}) grid: Table;
+  @ViewChild('tabela') grid;
 
   constructor(
     private lancamentoService: LancamentoService,
-    public auth: AuthService,
+    private auth: AuthService,
     private errorHandler: ErrorHandlerService,
     private toasty: ToastyService,
     private confirmation: ConfirmationService,
@@ -32,7 +30,7 @@ export class LancamentosPesquisaComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-   this.title.setTitle('Pesquisa de lancamentos');
+    this.title.setTitle('Pesquisa de lançamentos');
   }
 
   pesquisar(pagina = 0) {
@@ -49,7 +47,6 @@ export class LancamentosPesquisaComponent implements OnInit {
   aoMudarPagina(event: LazyLoadEvent) {
     const pagina = event.first / event.rows;
     this.pesquisar(pagina);
-    console.log(event);
   }
 
   confirmarExclusao(lancamento: any) {
@@ -64,7 +61,12 @@ export class LancamentosPesquisaComponent implements OnInit {
   excluir(lancamento: any) {
     this.lancamentoService.excluir(lancamento.codigo)
       .then(() => {
-        this.grid.reset();
+        if (this.grid.first === 0) {
+          this.pesquisar();
+        } else {
+          this.grid.first = 0;
+        }
+
         this.toasty.success('Lançamento excluído com sucesso!');
       })
       .catch(erro => this.errorHandler.handle(erro));

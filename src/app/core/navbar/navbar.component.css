@@ -1,4 +1,3 @@
-
 .navbar {
   padding: 10px 0;
   background-color: #1e94d2;
@@ -9,7 +8,7 @@
 }
 
 .navbar-menu {
-  position: fixed; /*keep it fixed, no scroll*/
+  position: fixed;
   top: 0;
   bottom: 0;
   right: 0;
@@ -20,13 +19,13 @@
 
   background-color: #3a3633;
 
-  list-style: none; /* no bullet points*/
+  list-style: none;
 }
 
 .navbar-usuario {
   padding: 15px;
   margin-bottom: 15px;
-  border-bottom: 1px solid #525151; /* draw a line, like an hr*/
+  border-bottom: 1px solid #525151;
 
   text-transform: uppercase;
   font-weight: bold;

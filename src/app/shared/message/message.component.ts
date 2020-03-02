@@ -1,14 +1,19 @@
-import { Component, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-message',
   template: `
-    <div *ngIf="temErro()" class="ui-messages ui-messages-error">
+    <div *ngIf="temErro()" class="ui-message ui-messages-error">
       {{ text }}
     </div>
   `,
-  styles: []
+  styles: [`
+    .ui-messages-error {
+      margin: 0;
+      margin-top: 4px;
+    }
+  `]
 })
 export class MessageComponent {
 

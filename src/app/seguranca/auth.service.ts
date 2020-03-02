@@ -1,68 +1,70 @@
-import { environment } from './../../environments/environment';
-import { JwtHelperService } from '@auth0/angular-jwt';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Http, Headers } from '@angular/http';
 import { Injectable } from '@angular/core';
 
+import { JwtHelper } from 'angular2-jwt';
 import 'rxjs/add/operator/toPromise';
+
+import { environment } from './../../environments/environment';
 
 @Injectable()
 export class AuthService {
-
-  tokensRevokeUrl: string;
 
   oauthTokenUrl: string;
   jwtPayload: any;
 
   constructor(
-    private http: HttpClient,
-    private jwtHelper: JwtHelperService
+    private http: Http,
+    private jwtHelper: JwtHelper
   ) {
-    this.tokensRevokeUrl = `${environment.apiUrl}/tokens/revoke`;
     this.oauthTokenUrl = `${environment.apiUrl}/oauth/token`;
     this.carregarToken();
   }
 
   login(usuario: string, senha: string): Promise<void> {
-    const headers = new HttpHeaders()
-      .set('Content-Type', 'application/x-www-form-urlencoded')
-      .set('Authorization', 'Basic YW5ndWxhcjpAbmd1bEByMA=='); // client id and secret
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    headers.append('Authorization', 'Basic YW5ndWxhcjpAbmd1bEByMA==');
 
     const body = `username=${usuario}&password=${senha}&grant_type=password`;
 
-    return this.http.post<any>(this.oauthTokenUrl, body,
-       { headers, withCredentials: true })
+    return this.http.post(this.oauthTokenUrl, body,
+        { headers, withCredentials: true })
       .toPromise()
       .then(response => {
-        this.armazenarToken(response.access_token);
+        this.armazenarToken(response.json().access_token);
       })
       .catch(response => {
-        const responseError = response.error;
         if (response.status === 400) {
-          if (responseError.error === 'invalid_grant') {
-            return Promise.reject('Usuário ou senha inválida');
+          const responseJson = response.json();
+
+          if (responseJson.error === 'invalid_grant') {
+            return Promise.reject('Usuário ou senha inválida!');
           }
         }
+
         return Promise.reject(response);
       });
   }
 
   obterNovoAccessToken(): Promise<void> {
-    const headers = new HttpHeaders()
-      .set('Content-Type', 'application/x-www-form-urlencoded')
-      .set('Authorization', 'Basic YW5ndWxhcjpAbmd1bEByMA==');
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    headers.append('Authorization', 'Basic YW5ndWxhcjpAbmd1bEByMA==');
 
     const body = 'grant_type=refresh_token';
 
-    return this.http.post<any>(this.oauthTokenUrl, body,
-       { headers, withCredentials: true })
+    return this.http.post(this.oauthTokenUrl, body,
+        { headers, withCredentials: true })
       .toPromise()
       .then(response => {
-        this.armazenarToken(response.access_token);
-        console.log('Novo Access token criado!');
+        this.armazenarToken(response.json().access_token);
+
+        console.log('Novo access token criado!');
+
         return Promise.resolve(null);
       })
       .catch(response => {
-        console.log('Erro ao renovar token', response);
+        console.error('Erro ao renovar token.', response);
         return Promise.resolve(null);
       });
   }
@@ -72,16 +74,9 @@ export class AuthService {
     this.jwtPayload = null;
   }
 
-  logout() {
-    return this.http.delete(this.tokensRevokeUrl, { withCredentials: true })
-      .toPromise()
-      .then(() => {
-        this.limparAccessToken();
-      });
-  }
-
   isAccessTokenInvalido() {
     const token = localStorage.getItem('token');
+
     return !token || this.jwtHelper.isTokenExpired(token);
   }
 
@@ -111,4 +106,5 @@ export class AuthService {
       this.armazenarToken(token);
     }
   }
+
 }
