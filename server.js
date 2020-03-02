@@ -7,6 +7,6 @@ app.get('/*', function(req, res) {
   res.sendFile(__dirname + '/dist/index.html');
 });
 
-app.listen(4200, function() {
-  console.log('server js running on port 4200!!!!');
+app.listen(process.env.PORT || 4200, function() {
+  console.log('server js running on port ' + process.env.PORT);
 });
