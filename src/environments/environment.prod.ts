@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://eliezer-java-api.herokuapp.com'
+  apiUrl: 'https://localhost:8080'
 };
