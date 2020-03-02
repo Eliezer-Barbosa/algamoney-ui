@@ -1,7 +1,7 @@
 import { AuthHttp } from 'angular2-jwt';
 import { Injectable } from '@angular/core';
 
-import { environment } from './../../environments/environment';
+import { environment } from './../../environments/environment.prod';
 import { AuthService } from './auth.service';
 
 @Injectable()
