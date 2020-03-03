@@ -6,7 +6,7 @@ app.use(express.static(__dirname + '/dist'));
 
 app.use(secure);
 
-app.get('/*', function(req, res) {
+app.get('/*', function(_req, res) {
   res.sendFile(__dirname + '/dist/index.html');
 });
 
