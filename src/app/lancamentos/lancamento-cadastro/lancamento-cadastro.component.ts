@@ -25,7 +25,7 @@ export class LancamentoCadastroComponent implements OnInit {
 
   categorias = [];
   pessoas = [];
- // lancamento = new Lancamento();
+  // lancamento = new Lancamento();
   formulario: FormGroup;
 
   constructor(
@@ -59,17 +59,17 @@ export class LancamentoCadastroComponent implements OnInit {
     this.formulario = this.formBuilder.group({
       codigo: [],
       tipo: [ 'RECEITA', Validators.required ],
-      dataVencimento: [null, Validators.required],
+      dataVencimento: [ null, Validators.required ],
       dataPagamento: [],
-      descricao: [null, [Validators.required, Validators.minLength(5) ]],
-      valor: [null, Validators.required],
+      descricao: [null, [ Validators.required, Validators.minLength(5) ]],
+      valor: [ null, Validators.required ],
       pessoa: this.formBuilder.group({
         codigo: [ null, Validators.required ],
         nome: []
       }),
       categoria: this.formBuilder.group({
         codigo: [ null, Validators.required ],
-        nome: [],
+        nome: []
       }),
       observacao: []
     });
@@ -82,8 +82,8 @@ export class LancamentoCadastroComponent implements OnInit {
   carregarLancamento(codigo: number) {
     this.lancamentoService.buscarPorCodigo(codigo)
       .then(lancamento => {
-      // this.lancamento = lancamento;
-        this.formulario.setValue(lancamento);
+        // this.lancamento = lancamento;
+        this.formulario.patchValue(lancamento);
         this.atualizarTituloEdicao();
       })
       .catch(erro => this.errorHandler.handle(erro));
@@ -112,8 +112,8 @@ export class LancamentoCadastroComponent implements OnInit {
   atualizarLancamento() {
     this.lancamentoService.atualizar(this.formulario.value)
       .then(lancamento => {
-       // this.lancamento = lancamento;
-          this.formulario.setValue(lancamento);
+        // this.lancamento = lancamento;
+        this.formulario.patchValue(lancamento);
 
         this.toasty.success('Lançamento alterado com sucesso!');
         this.atualizarTituloEdicao();
@@ -152,5 +152,4 @@ export class LancamentoCadastroComponent implements OnInit {
   atualizarTituloEdicao() {
     this.title.setTitle(`Edição de lançamento: ${this.formulario.get('descricao').value}`);
   }
-
 }
