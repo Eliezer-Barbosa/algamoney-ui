@@ -23,8 +23,6 @@ export class RelatorioLancamentoComponent implements OnInit {
         const url = window.URL.createObjectURL(relatorio);
 
         window.open(url);
-      });
-    }
+    });
   }
-
 }
