@@ -56,7 +56,26 @@ export class LancamentoCadastroComponent implements OnInit {
   }
 
   antesUploadAnexo(event) {
-    event.xhr.setRequestHeader('Authorization', 'Bearer' + localStorage.getItem('token'));
+    event.xhr.setRequestHeader('Authorization', 'Bearer ' + localStorage.getItem('token'));
+  }
+
+  aoTerminarUploadAnexo(event) {
+    const anexo = JSON.parse(event.xhr.response);
+
+    this.formulario.patchValue({
+      anexo: anexo.nome,
+      urlAnexo: anexo.url
+    });
+  }
+
+  get nomeAnexo() {
+    const nome = this.formulario.get('anexo').value;
+
+    if (nome) {
+      return nome.substring(nome.indexOf('_') + 1, nome.length);
+    }
+
+    return '';
   }
 
   get urlUploadAnexo() {
@@ -79,12 +98,14 @@ export class LancamentoCadastroComponent implements OnInit {
         codigo: [ null, Validators.required ],
         nome: []
       }),
-      observacao: []
+      observacao: [],
+      anexo: [],
+      urlAnexo: []
     });
   }
 
   validarObrigatoriedade(input: FormControl) {
-    return (input.value ? null : { obrigatoriedade: true })
+    return (input.value ? null : { obrigatoriedade: true });
   }
 
   validarTamanhoMinimo(valor: number) {
