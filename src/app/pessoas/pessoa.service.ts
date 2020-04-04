@@ -5,7 +5,7 @@ import { AuthHttp } from 'angular2-jwt';
 import 'rxjs/add/operator/toPromise';
 
 import { environment } from './../../environments/environment';
-import { Pessoa } from './../core/model';
+import { Pessoa, Estado, Cidade } from './../core/model';
 
 export class PessoaFiltro {
   nome: string;
@@ -17,9 +17,14 @@ export class PessoaFiltro {
 export class PessoaService {
 
   pessoasUrl: string;
+  cidadesUrl: string;
+  estadosUrl: string;
 
   constructor(private http: AuthHttp) {
     this.pessoasUrl = `${environment.apiUrl}/pessoas`;
+    this.cidadesUrl = `${environment.apiUrl}/cidades`;
+    this.estadosUrl = `${environment.apiUrl}/estados`;
+
   }
 
   pesquisar(filtro: PessoaFiltro): Promise<any> {
@@ -82,6 +87,21 @@ export class PessoaService {
     return this.http.get(`${this.pessoasUrl}/${codigo}`)
       .toPromise()
       .then(response => response.json() as Pessoa);
+  }
+
+  listarEstados(): Promise<Estado[]> {
+    return this.http.get(this.estadosUrl).toPromise()
+      .then(response => response.json());
+  }
+
+  pesquisarCidades(estado): Promise<Cidade[]> {
+    const params = new URLSearchParams();
+    params.set('estado', estado);
+
+    return this.http.get(this.cidadesUrl, {
+      search: params
+    }).toPromise()
+      .then(response => response.json());
   }
 
 }
