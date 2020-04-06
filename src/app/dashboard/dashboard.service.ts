@@ -1,10 +1,10 @@
-import { MoneyHttp } from './../seguranca/money-http';
 import { Injectable } from '@angular/core';
 
-import 'rxjs/operator/toPromise';
+
 import * as moment from 'moment';
 
 import { environment } from './../../environments/environment';
+import { MoneyHttp } from '../seguranca/money-http';
 
 @Injectable()
 export class DashboardService {
@@ -17,7 +17,7 @@ export class DashboardService {
 
   lancamentosPorCategoria(): Promise<Array<any>> {
     return this.http.get<Array<any>>(`${this.lancamentosUrl}/estatisticas/por-categoria`)
-      .toPromise()
+      .toPromise();
   }
 
   lancamentosPorDia(): Promise<Array<any>> {

@@ -18,7 +18,7 @@ export class LancamentosPesquisaComponent implements OnInit {
   totalRegistros = 0;
   filtro = new LancamentoFiltro();
   lancamentos = [];
-  @ViewChild('tabela') grid;
+  @ViewChild('tabela', { static: true }) grid;
 
   constructor(
     private lancamentoService: LancamentoService,
@@ -67,7 +67,7 @@ export class LancamentosPesquisaComponent implements OnInit {
           this.grid.first = 0;
         }
 
-        this.messageService.add( { severity: 'success', detail: 'Lançamento excluído com sucesso!'} );
+        this.messageService.add({ severity: 'success', detail: 'Lançamento excluído com sucesso!' });
       })
       .catch(erro => this.errorHandler.handle(erro));
   }

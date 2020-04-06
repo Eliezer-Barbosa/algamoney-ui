@@ -1,12 +1,12 @@
-import { MoneyHttp } from './../seguranca/money-http';
 import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import * as moment from 'moment';
-import 'rxjs/add/operator/toPromise';
+
 
 import { environment } from './../../environments/environment';
 import { Lancamento } from './../core/model';
+import { MoneyHttp } from '../seguranca/money-http';
 
 export class LancamentoFiltro {
   descricao: string;
@@ -16,7 +16,9 @@ export class LancamentoFiltro {
   itensPorPagina = 5;
 }
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class LancamentoService {
 
   lancamentosUrl: string;

@@ -17,7 +17,7 @@ export class PessoasPesquisaComponent implements OnInit {
   totalRegistros = 0;
   filtro = new PessoaFiltro();
   pessoas = [];
-  @ViewChild('tabela') grid;
+  @ViewChild('tabela', { static: true }) grid;
 
   constructor(
     private pessoaService: PessoaService,
@@ -65,7 +65,7 @@ export class PessoasPesquisaComponent implements OnInit {
           this.grid.first = 0;
         }
 
-        this.messageService.add( { severity: 'success', detail: 'Pesssoa excluída com sucesso!'} );
+        this.messageService.add({ severity: 'success', detail: 'Pesssoa excluída com sucesso!' });
       })
       .catch(erro => this.errorHandler.handle(erro));
   }
@@ -78,7 +78,7 @@ export class PessoasPesquisaComponent implements OnInit {
         const acao = novoStatus ? 'ativada' : 'desativada';
 
         pessoa.ativo = novoStatus;
-        this.messageService.add( { severity: 'success', detail: '`Pessoa ${acao} com sucesso!`'} );
+        this.messageService.add({ severity: 'success', detail: `Pessoa ${acao} com sucesso!` });
       })
       .catch(erro => this.errorHandler.handle(erro));
   }

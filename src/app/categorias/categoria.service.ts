@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 
-import 'rxjs/add/operator/toPromise';
+
 
 import { environment } from './../../environments/environment';
-import { MoneyHttp } from './../seguranca/money-http';
+import { MoneyHttp } from '../seguranca/money-http';
 
 @Injectable()
 export class CategoriaService {
@@ -16,7 +16,7 @@ export class CategoriaService {
 
   listarTodas(): Promise<any> {
     return this.http.get(this.categoriasUrl)
-      .toPromise()
+      .toPromise();
   }
 
 }
