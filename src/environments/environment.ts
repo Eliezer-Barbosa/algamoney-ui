@@ -4,10 +4,16 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false,
-  apiUrl: 'http://localhost:8080',
+  // production: false,
+  // apiUrl: 'http://localhost:8080',
 
-  tokenWhitelistedDomains: [ new RegExp('localhost:8080') ],
+  // tokenWhitelistedDomains: [ new RegExp('localhost:8080') ],
+  // tokenBlacklistedRoutes: [ new RegExp('\/oauth\/token') ]
+
+  production: true,
+  apiUrl: 'https://eliezer-java-api.herokuapp.com',
+
+  tokenWhitelistedDomains: [ new RegExp('eliezer-java-api.herokuapp.com') ],
   tokenBlacklistedRoutes: [ new RegExp('\/oauth\/token') ]
 };
 
