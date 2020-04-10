@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 
+import { environment } from './../../environments/environment.prod';
 
 
-import { environment } from './../../environments/environment';
+// import { environment } from './../../environments/environment';
 import { MoneyHttp } from '../seguranca/money-http';
 
 @Injectable()
