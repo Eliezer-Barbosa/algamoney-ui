@@ -3,8 +3,9 @@ import { Injectable } from '@angular/core';
 
 import * as moment from 'moment';
 
+import { environment } from './../../environments/environment.prod';
 
-import { environment } from './../../environments/environment';
+// import { environment } from './../../environments/environment';
 import { Lancamento } from './../core/model';
 import { MoneyHttp } from '../seguranca/money-http';
 
