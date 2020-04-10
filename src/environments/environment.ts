@@ -11,8 +11,8 @@ export const environment = {
   production: true,
   apiUrl: 'https://eliezer-java-api.herokuapp.com',
 
-  tokenWhitelistedDomains: [ new RegExp('localhost:8080') ],
-  tokenBlacklistedRoutes: [ new RegExp('\/oauth\/token') ]
+  // tokenWhitelistedDomains: [ new RegExp('localhost:8080') ],
+  // tokenBlacklistedRoutes: [ new RegExp('\/oauth\/token') ]
 };
 
 
