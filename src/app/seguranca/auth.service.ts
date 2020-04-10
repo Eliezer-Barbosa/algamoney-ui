@@ -3,8 +3,9 @@ import { Injectable } from '@angular/core';
 
 import { JwtHelperService } from '@auth0/angular-jwt';
 
+import { environment } from './../../environments/environment.prod';
 
-import { environment } from './../../environments/environment';
+// import { environment } from './../../environments/environment';
 
 @Injectable()
 export class AuthService {
