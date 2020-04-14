@@ -3,6 +3,6 @@ export const environment = {
   apiUrl: 'https://eliezer-java-api.herokuapp.com',
 
   tokenWhitelistedDomains: [ 'eliezer-java-api.herokuapp.com' ],
-  tokenBlacklistedRoutes: [ new RegExp('\/oauth\/token') ]
+  tokenBlacklistedRoutes: [ 'https://eliezer-java-api.herokuapp.com/oauth/token' ]
 };
 
